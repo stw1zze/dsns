@@ -2,142 +2,152 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>ДСНС Флеш-картки</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Флеш-картки</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ff6b00, #ff0000);
-            margin: 20px;
-            min-height: 100vh;
-            color: #fff;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
         }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-        }
+
         .tabs {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
+
         .tab {
-            background: #fff;
-            color: #000;
+            background-color: #ddd;
             padding: 10px 20px;
-            margin: 0 5px;
-            border-radius: 5px;
+            margin: 5px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
+            border-radius: 5px;
         }
+
         .tab.active {
-            background: #cc0000;
-            color: #fff;
+            background-color: #4CAF50;
+            color: white;
         }
+
         .content {
             display: none;
+            padding: 20px;
         }
+
         .content.active {
             display: block;
         }
+
         .card {
-            background: linear-gradient(90deg, #ff7f00, #cc0000);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            margin-bottom: 15px;
+            background-color: white;
+            margin: 10px 0;
             padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             cursor: pointer;
-            transition: background 0.4s, transform 0.2s;
         }
-        .card:hover {
-            background: linear-gradient(90deg, #ff9a33, #e60000);
-            transform: scale(1.03);
-        }
+
         .answer {
             display: none;
             margin-top: 10px;
-            background-color: rgba(255,255,255,0.9);
             color: #333;
-            padding: 10px;
-            border-radius: 6px;
         }
     </style>
 </head>
 <body>
 
-<h1>ДСНС Флеш-картки</h1>
+    <div class="tabs">
+        <div class="tab active" onclick="showTab(1)">[1] Рядовий – Старший Сержант</div>
+        <div class="tab" onclick="showTab(2)">[2] Старший Сержант – Старшина</div>
+        <div class="tab" onclick="showTab(3)">[3] Старшина – Прапорщик</div>
+    </div>
 
-<div class="tabs">
-    <div class="tab active" onclick="showTab(0)">Рядовий[1] - Сержант [2]</div>
-    <div class="tab" onclick="showTab(1)">Сержант[2] - Старшина [3]</div>
-    <div class="tab" onclick="showTab(2)">Старшина[3] - Прапорщик[4]</div>
-</div>
+    <!-- Вкладка 1 -->
+    <div class="content active">
+        <div class="card" onclick="toggleAnswer('answer1')">
+            <strong>Який графік роботи на будні?</strong>
+            <div class="answer" id="answer1">09:00 – 21:00 з перервами 12:00–13:00, 17:00–18:00</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('answer2')">
+            <strong>Який графік роботи у вихідні?</strong>
+            <div class="answer" id="answer2">10:00 – 20:00 з перервою 15:00–16:00</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('answer3')">
+            <strong>Що потрібно зробити перед початком служби?</strong>
+            <div class="answer" id="answer3">Скласти Присягу</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('answer4')">
+            <strong>З чим потрібно ознайомитись новобранцю?</strong>
+            <div class="answer" id="answer4">З Дрес-кодом</div>
+        </div>
+    </div>
 
-<div class="content active">
-    <div class="card" onclick="toggleAnswer('answer1')">
-        <strong>Графік роботи (Пн–Пт)</strong>
-        <div class="answer" id="answer1">09:00 – 21:00, перерви: 12:00–13:00, 17:00–18:00</div>
-    </div>
-    <div class="card" onclick="toggleAnswer('answer2')">
-        <strong>Графік роботи (Сб–Нд)</strong>
-        <div class="answer" id="answer2">10:00 – 20:00, перерва: 15:00–16:00</div>
-    </div>
-    <div class="card" onclick="toggleAnswer('answer3')">
-        <strong>Сдати Присягу</strong>
-        <div class="answer" id="answer3">Обов'язкова процедура для вступу до служби. Відбувається у визначений день з урочистою церемонією.</div>
-    </div>
-    <div class="card" onclick="toggleAnswer('answer4')">
-        <strong>Ознайомитись з ДресКодом</strong>
-        <div class="answer" id="answer4">Дотримання форменого одягу згідно з внутрішнім статутом. Включає чистоту, охайність, правильність носіння.</div>
-    </div>
-</div>
-
-<div class="content">
+    <!-- Вкладка 2 -->
     <div class="content">
-    <div class="card" onclick="toggleAnswer('tab2answer1')">
-        <strong>Клас A пожежі</strong>
-        <div class="answer" id="tab2answer1">Горючі тверді матеріали: деревина, папір, текстиль. Приклад: горіння меблів або паперу.</div>
+        <div class="card" onclick="toggleAnswer('tab2answer1')">
+            <strong>Які матеріали належать до пожеж класу A?</strong>
+            <div class="answer" id="tab2answer1">Деревина, папір, текстиль, пластмаси.</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('tab2answer2')">
+            <strong>Що горить при пожежах класу B?</strong>
+            <div class="answer" id="tab2answer2">Горючі рідини: бензин, олія, спирти.</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('tab2answer3')">
+            <strong>Який вогнегасник підходить для пожеж класу C?</strong>
+            <div class="answer" id="tab2answer3">Вуглекислотний або порошковий.</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('tab2answer4')">
+            <strong>Що означає Код-4?</strong>
+            <div class="answer" id="tab2answer4">Надзвичайний стан</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('tab2answer5')">
+            <strong>Як сказати "Так" за субординацією?</strong>
+            <div class="answer" id="tab2answer5">"Так є", "Саме так", "+" або "Так пане"</div>
+        </div>
     </div>
-    <div class="card" onclick="toggleAnswer('tab2answer2')">
-        <strong>Порошковий вогнегасник</strong>
-        <div class="answer" id="tab2answer2">Підходить для гасіння пожеж класів A, B, C. Містить порошкову вогнегасну речовину, ефективний для широкого спектра загорянь.</div>
-    </div>
-    <div class="card" onclick="toggleAnswer('tab2answer3')">
-        <strong>Код-3</strong>
-        <div class="answer" id="tab2answer3">Тривога на Головному управлінні ДСНС. Означає надзвичайну ситуацію на об'єкті.</div>
-    </div>
-    <div class="card" onclick="toggleAnswer('tab2answer4')">
-        <strong>КОД 10-4</strong>
-        <div class="answer" id="tab2answer4">Відповідь позитивна. Зрозумів інформацію, підтвердження отримання повідомлення.</div>
-    </div>
-    <div class="card" onclick="toggleAnswer('tab2answer5')">
-        <strong>Що таке субординація?</strong>
-        <div class="answer" id="tab2answer5">Це службове підпорядкування. Включає повагу, дисципліну, покору молодшого за званням старшому.</div>
-    </div>
-</div>
-</div>
 
-<div class="content">
-    <p>Сюди можна додати питання для підготовки від Старшини до Прапорщика.</p>
-</div>
+    <!-- Вкладка 3 -->
+    <div class="content">
+        <div class="card" onclick="toggleAnswer('tab3answer1')">
+            <strong>Що таке гідрометеорологічні катастрофи?</strong>
+            <div class="answer" id="tab3answer1">Стихійні явища природи: бурі, урагани, повені, посухи.</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('tab3answer2')">
+            <strong>Що таке індустріальні аварії?</strong>
+            <div class="answer" id="tab3answer2">Катастрофи через порушення технологій, конструкцій чи людські помилки.</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('tab3answer3')">
+            <strong>Військовий конфлікт – це...</strong>
+            <div class="answer" id="tab3answer3">Збройне протистояння між державами або угрупованнями.</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('tab3answer4')">
+            <strong>Ознака змін клімату</strong>
+            <div class="answer" id="tab3answer4">Підвищення температури, танення льодовиків, екстремальні явища.</div>
+        </div>
+        <div class="card" onclick="toggleAnswer('tab3answer5')">
+            <strong>Що таке протипанцирна міна?</strong>
+            <div class="answer" id="tab3answer5">Міна, що активується під вагою техніки і має сильну вибухову силу.</div>
+        </div>
+    </div>
 
-<script>
-function toggleAnswer(id) {
-    const answer = document.getElementById(id);
-    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-}
+    <script>
+        function showTab(tabIndex) {
+            const contents = document.querySelectorAll('.content');
+            const tabs = document.querySelectorAll('.tab');
+            contents.forEach((c, i) => {
+                c.classList.toggle('active', i === tabIndex - 1);
+                tabs[i].classList.toggle('active', i === tabIndex - 1);
+            });
+        }
 
-function showTab(index) {
-    const tabs = document.querySelectorAll('.tab');
-    const contents = document.querySelectorAll('.content');
-
-    tabs.forEach((tab, i) => {
-        tab.classList.toggle('active', i === index);
-        contents[i].classList.toggle('active', i === index);
-    });
-}
-</script>
+        function toggleAnswer(id) {
+            const answer = document.getElementById(id);
+            answer.style.display = (answer.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
 
 </body>
 </html>
