@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>ДСНС Флеш-картки</title>
     <style>
         body {
@@ -13,45 +13,34 @@
         }
         h1 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
         }
-        /* Стили вкладок */
         .tabs {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
         }
         .tab {
+            background: #fff;
+            color: #000;
             padding: 10px 20px;
-            background: #cc0000;
             margin: 0 5px;
-            border-radius: 6px 6px 0 0;
+            border-radius: 5px;
             cursor: pointer;
-            user-select: none;
+            font-weight: bold;
             transition: background 0.3s;
         }
         .tab.active {
-            background: #ff7f00;
-            font-weight: bold;
+            background: #cc0000;
+            color: #fff;
         }
-
-        /* Контент вкладки */
-        .tab-content {
+        .content {
             display: none;
-            background: linear-gradient(90deg, #ff7f00, #cc0000);
-            border-radius: 0 6px 6px 6px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            max-width: 600px;
-            margin: 0 auto;
-            color: white;
         }
-        .tab-content.active {
+        .content.active {
             display: block;
         }
-
-        /* Карточки */
         .card {
             background: linear-gradient(90deg, #ff7f00, #cc0000);
             border-radius: 8px;
@@ -60,7 +49,6 @@
             padding: 15px;
             cursor: pointer;
             transition: background 0.4s, transform 0.2s;
-            color: white;
         }
         .card:hover {
             background: linear-gradient(90deg, #ff9a33, #e60000);
@@ -69,82 +57,66 @@
         .answer {
             display: none;
             margin-top: 10px;
-            background-color: rgba(255,255,255,0.85);
+            background-color: rgba(255,255,255,0.9);
             color: #333;
             padding: 10px;
             border-radius: 6px;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-    <h1>ДСНС Флеш-картки</h1>
 
-    <div class="tabs">
-        <div class="tab active" data-tab="tab1">Рядовий[1] - Сержант[2] +</div>
-        <div class="tab" data-tab="tab2">Сержант[2] - Старшина[3] +</div>
-        <div class="tab" data-tab="tab3">Старшина[3] - Прапорщик[4]</div>
+<h1>ДСНС Флеш-картки</h1>
+
+<div class="tabs">
+    <div class="tab active" onclick="showTab(0)">Рядовий[1] - Сержант [2]</div>
+    <div class="tab" onclick="showTab(1)">Сержант[2] - Старшина [3]</div>
+    <div class="tab" onclick="showTab(2)">Старшина[3] - Прапорщик[4]</div>
+</div>
+
+<div class="content active">
+    <div class="card" onclick="toggleAnswer('answer1')">
+        <strong>Графік роботи (Пн–Пт)</strong>
+        <div class="answer" id="answer1">09:00 – 21:00, перерви: 12:00–13:00, 17:00–18:00</div>
     </div>
-
-    <div id="tab1" class="tab-content active">
-        <div class="card" onclick="toggleAnswer('a1-0')">
-            <strong>Питання 1</strong>
-            <div class="answer" id="a1-0">Відповідь на питання 1 у вкладці 1</div>
-        </div>
-        <div class="card" onclick="toggleAnswer('a1-1')">
-            <strong>Питання 2</strong>
-            <div class="answer" id="a1-1">Відповідь на питання 2 у вкладці 1</div>
-        </div>
+    <div class="card" onclick="toggleAnswer('answer2')">
+        <strong>Графік роботи (Сб–Нд)</strong>
+        <div class="answer" id="answer2">10:00 – 20:00, перерва: 15:00–16:00</div>
     </div>
-
-    <div id="tab2" class="tab-content">
-        <div class="card" onclick="toggleAnswer('a2-0')">
-            <strong>Питання 1</strong>
-            <div class="answer" id="a2-0">Відповідь на питання 1 у вкладці 2</div>
-        </div>
-        <div class="card" onclick="toggleAnswer('a2-1')">
-            <strong>Питання 2</strong>
-            <div class="answer" id="a2-1">Відповідь на питання 2 у вкладці 2</div>
-        </div>
+    <div class="card" onclick="toggleAnswer('answer3')">
+        <strong>Сдати Присягу</strong>
+        <div class="answer" id="answer3">Обов'язкова процедура для вступу до служби. Відбувається у визначений день з урочистою церемонією.</div>
     </div>
-
-    <div id="tab3" class="tab-content">
-        <div class="card" onclick="toggleAnswer('a3-0')">
-            <strong>Питання 1</strong>
-            <div class="answer" id="a3-0">Відповідь на питання 1 у вкладці 3</div>
-        </div>
-        <div class="card" onclick="toggleAnswer('a3-1')">
-            <strong>Питання 2</strong>
-            <div class="answer" id="a3-1">Відповідь на питання 2 у вкладці 3</div>
-        </div>
+    <div class="card" onclick="toggleAnswer('answer4')">
+        <strong>Ознайомитись з ДресКодом</strong>
+        <div class="answer" id="answer4">Дотримання форменого одягу згідно з внутрішнім статутом. Включає чистоту, охайність, правильність носіння.</div>
     </div>
+</div>
 
-    <script>
-        // Переключение вкладок
-        const tabs = document.querySelectorAll('.tab');
-        const contents = document.querySelectorAll('.tab-content');
+<div class="content">
+    <p>Сюди можна додати питання для підготовки від Сержанта до Старшини.</p>
+</div>
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Снимаем активность у всех вкладок и содержимого
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
+<div class="content">
+    <p>Сюди можна додати питання для підготовки від Старшини до Прапорщика.</p>
+</div>
 
-                // Активируем текущую вкладку и контент
-                tab.classList.add('active');
-                document.getElementById(tab.dataset.tab).classList.add('active');
-            });
-        });
+<script>
+function toggleAnswer(id) {
+    const answer = document.getElementById(id);
+    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+}
 
-        // Показываем/скрываем ответ на карточке
-        function toggleAnswer(id) {
-            const el = document.getElementById(id);
-            if (el.style.display === 'block') {
-                el.style.display = 'none';
-            } else {
-                el.style.display = 'block';
-            }
-        }
-    </script>
+function showTab(index) {
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.content');
+
+    tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+        contents[i].classList.toggle('active', i === index);
+    });
+}
+</script>
+
 </body>
 </html>
